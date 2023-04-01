@@ -15,6 +15,13 @@
     <label for="name">Name</label>
     <input id="name" type="text" value="Anna Gallo" />
 
+    <label for="avatar">User Photo URL</label>
+    <input
+      id="avatar"
+      type="text"
+      value="https://i.imgur.com/AoYvA0H.png"
+    />
+
     <label for="content">Post Content</label>
     <input
       class="textarea"
@@ -48,6 +55,7 @@
     e.preventDefault();
     const name = document.getElementById("name").value;
     const username = document.getElementById("username").value;
+    const avatar = document.getElementById("avatar").value;
     const content = document.getElementById("content").value;
     const darkModeState = document.getElementById("dark-mode-on").checked;
     const imageVariant = document.querySelector(
@@ -60,6 +68,7 @@
           type: "generate-post",
           name,
           username,
+          avatar,
           content,
           darkModeState,
           imageVariant,

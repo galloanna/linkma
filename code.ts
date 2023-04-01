@@ -63,6 +63,24 @@ figma.ui.onmessage = async (pluginMessage) => {
     const numComments = newPost.findOne(
       (node) => node.name === "commentsLabel" && node.type === "TEXT"
     ) as TextNode;
+    const templateAvatarComponent = newPost.findOne(
+      (node) => node.name == "avatar / small"
+    ) as InstanceNode;
+
+    const userImage = templateAvatarComponent.findOne(
+      (node) => node.name == "image"
+    ) as EllipseNode;
+    console.log("avatar ", userImage);
+
+    figma.createImageAsync(pluginMessage.avatar).then(async (image: Image) => {
+      userImage.fills = [
+        {
+          type: "IMAGE",
+          imageHash: image.hash,
+          scaleMode: "FILL",
+        },
+      ];
+    });
 
     templateName.characters = pluginMessage.name;
     templateUsername.characters = pluginMessage.username;
