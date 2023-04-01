@@ -1,17 +1,74 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<style>
+  input:not([type="radio"]),
+  button {
+    display: block;
+  }
+</style>
+
+<h2>Linkma</h2>
+<form>
+  <fieldset>
+    <legend>Enter your placeholder post information</legend>
+    <label for="username">Username</label>
+    <input id="username" type="text" value="@galloanna" />
+
+    <label for="name">Name</label>
+    <input id="name" type="text" value="Anna Gallo" />
+
+    <label for="content">Post Content</label>
+    <input
+      class="textarea"
+      id="content"
+      type="textarea"
+      value="Thinks Design Systems are the bees knees. 🐝"
+    />
+
+    <label class="switch__label" for="dark-mode-on">Dark mode</label>
+    <input type="checkbox" id="dark-mode-on" />
+
+    <label for="no-image">No Image</label>
+    <input
+      type="radio"
+      id="no-image"
+      name="postImageVariants"
+      value="no-image"
+      checked
+    />
+
+    <label for="image">Image</label>
+    <input type="radio" id="image" name="postImageVariants" value="image" />
+
+    <button id="generate-post">Generate Post</button>
+    <button id="close">Close</button>
+  </fieldset>
+</form>
+
 <script>
+  document.getElementById("generate-post").onclick = (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const username = document.getElementById("username").value;
+    const content = document.getElementById("content").value;
+    const darkModeState = document.getElementById("dark-mode-on").checked;
+    const imageVariant = document.querySelector(
+      'input[name="postImageVariants"]:checked'
+    ).value;
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-}
-
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
-
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "generate-post",
+          name,
+          username,
+          content,
+          darkModeState,
+          imageVariant,
+        },
+      },
+      "*"
+    );
+  };
+  document.getElementById("close").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "close" } }, "*");
+  };
 </script>
