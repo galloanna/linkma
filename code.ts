@@ -82,17 +82,17 @@ figma.ui.onmessage = async (pluginMessage) => {
       ];
     });
 
-    figma.createImageAsync(pluginMessage.imagePath).then(async (image: Image) => {
-      templatePostImageComponent.fills = [
-        {
-          type: "IMAGE",
-          imageHash: image.hash,
-          scaleMode: "FILL",
-        },
-      ];
-    });
-
-
+    figma
+      .createImageAsync(pluginMessage.imagePath)
+      .then(async (image: Image) => {
+        templatePostImageComponent.fills = [
+          {
+            type: "IMAGE",
+            imageHash: image.hash,
+            scaleMode: "FILL",
+          },
+        ];
+      });
 
     templateName.characters = pluginMessage.name;
     templateHeadline.characters = pluginMessage.headline;
