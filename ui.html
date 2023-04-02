@@ -1,66 +1,165 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
 <style>
-  input:not([type="radio"]),
-  button {
-    display: block;
+  /* New styles */
+
+  .hidden {
+    display: none;
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  fieldset {
+    border: none;
+  }
+
+  legend {
+    margin: 16px 0;
+    font-size: 18px;
+  }
+
+  .thumbnail-preview {
+    margin-top: 4px;
+    border-radius: 50%;
+  }
+
+  .randomize-button {
+    margin: 8px 0;
+  }
+
+  .main-buttons {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+  }
+
+
+  /* Overrides */
+
+  :root {
+    --blue: rebeccapurple;
+    --black3: #666;
+  }
+
+  .label,
+  .button,
+  .textarea,
+  .input__field,
+  .checkbox__label,
+  .radio__label {
+    font-size: 16px;
+  }
+
+  .textarea {
+    font-family: unset;
+  }
+
+  .input__field {
+    border: 1px solid var(--black1)
+  }
+
+  .input__field:hover {
+    border: 1px solid black;
+  }
+
+  .radio__button~.radio__label,
+  .checkbox__box~.checkbox__label {
+    cursor: pointer;
+
+  }
+
+  .radio__button:focus~.radio__label::before,
+  .checkbox__box:focus~.checkbox__label::before {
+    border: 2px solid var(--blue);
+  }
+
+  .checkbox__label::before,
+  .radio__label::before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .checkbox__box:checked+.checkbox__label::before,
+  .radio__button:checked+.radio__label::before {
+    background-size: 75%;
+    background-position: center;
   }
 </style>
 
 <h2>Linkma</h2>
 <form>
   <fieldset>
-    <legend>Enter your fake user information</legend>
-    <label for="username">Username</label>
-    <input id="username" type="text" value="@galloanna" />
+    <legend>Update mock post information.</legend>
 
-    <label for="name">Name</label>
-    <input id="name" type="text" value="Anna Gallo" />
+    <div class="input">
+      <label for="name" class="label">Name</label>
+      <input id="name" type="text" value="Anna Gallo" class="input__field" />
+    </div>
 
-    <img
-      id="thumbnail-preview"
-      alt=""
-      src="https://i.imgur.com/AoYvA0H.png"
-      width="40px"
-      height="40px"
-    />
-    <label for="avatar">User Photo URL</label>
-    <input id="avatar" type="text" value="https://i.imgur.com/AoYvA0H.png" />
+    <label for="headline" class="label">Headline</label>
+    <input id="headline" type="text" value="Frontend + Accessibility" class="input__field" />
 
-    <label for="content">Post Content</label>
-    <input
-      class="textarea"
-      id="content"
-      type="textarea"
-      value="Thinks Design Systems are the bees knees. 🐝"
-    />
+    <img id="thumbnail-preview" class="thumbnail-preview" alt="" src="https://i.imgur.com/AoYvA0H.png" width="48px"
+      height="48px" />
+    <div class="input">
+      <label for="avatar" class="label">User Photo URL</label>
+      <input id="avatar" type="text" class="input__field" value="https://i.imgur.com/AoYvA0H.png" />
+    </div>
 
-    <button id="randomize-user">Randomize</button>
+    <label for="content" class="label">Post Content</label>
+    <textarea id="content" type="textarea" class="textarea" rows="5"
+      wrap="hard">I think Design Systems are the bee's knees. I've been reading and studying and absorbing independently for over five years and have gotten dangerously close to working on one several times. Will this bee my lucky break? 🐝</textarea>
+
+    <div class="checkbox">
+      <input type="checkbox" id="dark-mode-on" class="checkbox__box" />
+      <label for="dark-mode-on" class="checkbox__label">Dark mode</label>
+    </div>
+
+    <div class="radio">
+      <input type="radio" id="no-image" class="radio__button" name="postImageVariants" value="no-image" checked />
+      <label for="no-image" class="radio__label">No Image</label>
+    </div>
+
+    <div class="radio">
+      <input type="radio" id="image" name="postImageVariants" value="image" class="radio__button" />
+      <label for="image" class="radio__label">Image</label>
+    </div>
+
+    <div id="post-image-field" class="input hidden">
+      <label for=post-image" class="label">Post Image URL</label>
+      <input id="post-image" class="input__field" type="text" value="https://i.imgur.com/Beo0Vbl.jpeg" />
+    </div>
+
+    <button id="randomize-user" class="button button--tertiary randomize-button">Randomize input</button>
+    <div class="main-buttons">
+      <button id="generate-post" class="button button--primary">Generate Post</button>
+      <button id="close" class="button button--secondary">Close</button>
+    </div>
   </fieldset>
-
-  <fieldset>
-    <legend>Choose design options</legend>
-
-    <label class="switch__label" for="dark-mode-on">Dark mode</label>
-    <input type="checkbox" id="dark-mode-on" />
-
-    <label for="no-image">No Image</label>
-    <input
-      type="radio"
-      id="no-image"
-      name="postImageVariants"
-      value="no-image"
-      checked
-    />
-
-    <label for="image">Image</label>
-    <input type="radio" id="image" name="postImageVariants" value="image" />
-  </fieldset>
-  <button id="generate-post">Generate Post</button>
-  <button id="close">Close</button>
 </form>
 
 <script>
+  document.querySelectorAll('input[name="postImageVariants"]').forEach(el => el.addEventListener("click", handleClick));
+
+  function handleClick() {
+    if (document.getElementById("image").checked) {
+      document.getElementById("post-image-field").classList.remove("hidden")
+    } else {
+      document.getElementById("post-image-field").classList.add("hidden")
+    }
+  }
+
   document.getElementById("randomize-user").onclick = (e) => {
     e.preventDefault();
+    const randomPosts = [
+      'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.',
+      'Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.',
+      'Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.',
+      'Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.',
+      'Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
+    ]
     async function fetchFakeUser() {
       const response = await fetch("https://randomuser.me/api/");
       const userData = await response.json();
@@ -68,36 +167,39 @@
     }
     fetchFakeUser().then((userData) => {
       const data = userData.results[0];
-      console.log("data ", data);
       document.getElementById("name").value =
         data.name.first + " " + data.name.last;
-      document.getElementById("username").value = "@" + data.login.username;
+      document.getElementById("headline").value = data.location.city;
       document.getElementById("avatar").value = data.picture.thumbnail;
       document.getElementById("thumbnail-preview").src = data.picture.thumbnail;
+      document.getElementById("content").value = randomPosts[(Math.random() * randomPosts.length) | 0]
+      document.getElementById("post-image").value = 'https://picsum.photos/600/300'
     });
   };
 
   document.getElementById("generate-post").onclick = (e) => {
     e.preventDefault();
     const name = document.getElementById("name").value;
-    const username = document.getElementById("username").value;
+    const headline = document.getElementById("headline").value;
     const avatar = document.getElementById("avatar").value;
     const content = document.getElementById("content").value;
     const darkModeState = document.getElementById("dark-mode-on").checked;
     const imageVariant = document.querySelector(
       'input[name="postImageVariants"]:checked'
     ).value;
+    const imagePath = document.getElementById("post-image").value;
 
     parent.postMessage(
       {
         pluginMessage: {
           type: "generate-post",
           name,
-          username,
+          headline,
           avatar,
           content,
           darkModeState,
           imageVariant,
+          imagePath,
         },
       },
       "*"
