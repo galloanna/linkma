@@ -3,6 +3,10 @@
 
 This project was created as a supplemental application material for a Design Engineer role at LinkedIn.
 
+Linkma is a Figma plugin that generates editable, prototypable Figma components using a combination of design tokens, component instances, markup, and JavaScript. Linkma is meant to expedite internal workflows for UX, Product Design, Design Systems, or similar teams.
+
+The plugin currently generates LinkedIn Post components.
+
 <img src="https://user-images.githubusercontent.com/61474460/229335152-e2ee9e58-4b55-488c-8f5d-282feae1646d.png" width="60%" alt="" />
 
 ## ✔️ Features
@@ -14,34 +18,33 @@ This project was created as a supplemental application material for a Design Eng
 - Accessible color palette, focus indicators, and control associations
 
 
-
 ## 👀 Demo
 
 *Link to downloadable Figma Community instance coming soon.*
 
-<img src="https://user-images.githubusercontent.com/61474460/229336948-4ea1687c-c6a3-4c2a-9888-9ab67b886385.gif" width="60%" alt="" />
-<figcaption>Generating dark mode post component with image from default content.</figcaption>
+<img src="https://user-images.githubusercontent.com/61474460/229338580-ebb1a676-61a0-4314-b571-4f68cfc08620.gif" width="60%" alt="" />
+<figcaption>Generating light mode post component with image from default content.</figcaption>
 </figure>
 <br>
 <hr>
 <br>
 <figure>
-<img src="https://user-images.githubusercontent.com/61474460/229337286-87d7db20-8404-4b3c-94fb-2f423ecc7cc6.gif" width="60%" alt="" />
-<figcaption>Generating light mode post component without image from randomized content.</figcaption>
+<img src="https://user-images.githubusercontent.com/61474460/229338603-8f86b37e-5e25-4ffe-8531-bcb50a0b27bc.gif" width="60%" alt="" />
+<figcaption>Generating dark mode post component with image from randomized content.</figcaption>
 </figure>
 <br>
 <hr>
 <br>
 <figure>
-<img src="https://user-images.githubusercontent.com/61474460/229337262-83612c7a-3de9-47f1-ac83-e33284142440.gif" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229338638-c70b004f-93e5-4f69-b073-b33883cb97a8.gif" width="60%" alt="" />
 <figcaption>Generating light mode post component without image from custom content.</figcaption>
 </figure>
 <br>
 <hr>
 <br>
 <figure>
-<img src="https://user-images.githubusercontent.com/61474460/229337358-015051ec-8a76-4747-a99e-b615c5bd4980.gif" width="60%" alt="" />
-<figcaption>Generating light mode post component with image from random content.</figcaption>
+<img src="https://user-images.githubusercontent.com/61474460/229339010-bcfc2b1f-c9a7-4fb0-9b96-c35d5cf9f05f.gif" width="60%" alt="" />
+<figcaption>Generating light mode post component without image from randomized content.</figcaption>
 </figure>
 
 
@@ -63,7 +66,7 @@ Import the plugin to your local development environment by doing the following:
 - Run the plugin by choosing Figma > Plugins > Development > Linkma
 
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 This project was developed using the following resources:
 
