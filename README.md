@@ -19,25 +19,30 @@ This project was created as a supplemental application material for a Design Eng
 
 *Link to downloadable Figma Community instance coming soon.*
 
-<figure>
-<img src="https://user-images.githubusercontent.com/61474460/229335013-f0c786b9-b0e9-4c0d-94ac-30ae62907a65.gif" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229336948-4ea1687c-c6a3-4c2a-9888-9ab67b886385.gif" width="60%" alt="" />
 <figcaption>Generating dark mode post component with image from default content.</figcaption>
 </figure>
 <br>
 <hr>
 <br>
 <figure>
-<img src="https://user-images.githubusercontent.com/61474460/229335060-a2495fee-79df-41c5-acd9-b2ff01d640cc.gif" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229337286-87d7db20-8404-4b3c-94fb-2f423ecc7cc6.gif" width="60%" alt="" />
 <figcaption>Generating light mode post component without image from randomized content.</figcaption>
 </figure>
 <br>
 <hr>
 <br>
 <figure>
-<img src="https://user-images.githubusercontent.com/61474460/229335065-4126f0aa-2a38-4e60-994b-bf013c4e3528.gif" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229337262-83612c7a-3de9-47f1-ac83-e33284142440.gif" width="60%" alt="" />
 <figcaption>Generating light mode post component without image from custom content.</figcaption>
 </figure>
-
+<br>
+<hr>
+<br>
+<figure>
+<img src="https://user-images.githubusercontent.com/61474460/229337358-015051ec-8a76-4747-a99e-b615c5bd4980.gif" width="60%" alt="" />
+<figcaption>Generating light mode post component with image from random content.</figcaption>
+</figure>
 
 
 ## 🏃‍♀️ Run Locally
