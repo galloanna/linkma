@@ -3,7 +3,8 @@ figma.showUI(__html__);
 figma.ui.resize(500, 500);
 
 figma.ui.onmessage = async (pluginMessage) => {
-  await figma.loadFontAsync({ family: "Rubik", style: "Regular" });
+  await figma.loadFontAsync({ family: "Segoe UI", style: "Regular" });
+  await figma.loadFontAsync({ family: "Segoe UI", style: "Bold" });
 
   const nodes: SceneNode[] = [];
 
@@ -51,26 +52,25 @@ figma.ui.onmessage = async (pluginMessage) => {
     const templateName = newPost.findOne(
       (node) => node.type == "TEXT" && node.name == "displayName"
     ) as TextNode;
-    const templateUsername = newPost.findOne(
-      (node) => node.type == "TEXT" && node.name == "@username"
+    const templateHeadline = newPost.findOne(
+      (node) => node.type == "TEXT" && node.name == "headline"
     ) as TextNode;
     const templateContent = newPost.findOne(
-      (node) => node.type == "TEXT" && node.name == "description"
+      (node) => node.type == "TEXT" && node.name == "cardContent"
     ) as TextNode;
-    const numLikes = newPost.findOne(
-      (node) => node.name === "likesLabel" && node.type === "TEXT"
-    ) as TextNode;
-    const numComments = newPost.findOne(
-      (node) => node.name === "commentsLabel" && node.type === "TEXT"
+    const numReactions = newPost.findOne(
+      (node) => node.name === "reactionCount" && node.type === "TEXT"
     ) as TextNode;
     const templateAvatarComponent = newPost.findOne(
       (node) => node.name == "avatar / small"
+    ) as InstanceNode;
+    const templatePostImageComponent = newPost.findOne(
+      (node) => node.name == "cardImage"
     ) as InstanceNode;
 
     const userImage = templateAvatarComponent.findOne(
       (node) => node.name == "image"
     ) as EllipseNode;
-    console.log("avatar ", userImage);
 
     figma.createImageAsync(pluginMessage.avatar).then(async (image: Image) => {
       userImage.fills = [
@@ -82,11 +82,22 @@ figma.ui.onmessage = async (pluginMessage) => {
       ];
     });
 
+    figma.createImageAsync(pluginMessage.imagePath).then(async (image: Image) => {
+      templatePostImageComponent.fills = [
+        {
+          type: "IMAGE",
+          imageHash: image.hash,
+          scaleMode: "FILL",
+        },
+      ];
+    });
+
+
+
     templateName.characters = pluginMessage.name;
-    templateUsername.characters = pluginMessage.username;
+    templateHeadline.characters = pluginMessage.headline;
     templateContent.characters = pluginMessage.content;
-    numLikes.characters = (Math.floor(Math.random() * 1000) + 1).toString();
-    numComments.characters = (Math.floor(Math.random() * 1000) + 1).toString();
+    numReactions.characters = (Math.floor(Math.random() * 1000) + 1).toString();
 
     nodes.push(newPost);
     figma.viewport.scrollAndZoomIntoView(nodes);

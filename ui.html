@@ -3,43 +3,40 @@
   button {
     display: block;
   }
+  .hidden {
+    display: none;
+  }
 </style>
 
 <h2>Linkma</h2>
 <form>
   <fieldset>
-    <legend>Enter your fake user information</legend>
-    <label for="username">Username</label>
-    <input id="username" type="text" value="@galloanna" />
+    <legend>Update mock post information</legend>
 
     <label for="name">Name</label>
     <input id="name" type="text" value="Anna Gallo" />
+
+    <label for="headline">Headline</label>
+    <input id="headline" type="text" value="Frontend + Accessibility" />
 
     <img
       id="thumbnail-preview"
       alt=""
       src="https://i.imgur.com/AoYvA0H.png"
-      width="40px"
-      height="40px"
+      width="48px"
+      height="48px"
     />
     <label for="avatar">User Photo URL</label>
     <input id="avatar" type="text" value="https://i.imgur.com/AoYvA0H.png" />
 
     <label for="content">Post Content</label>
     <input
-      class="textarea"
       id="content"
       type="textarea"
-      value="Thinks Design Systems are the bees knees. 🐝"
+      value="I think Design Systems are the bee's knees. I've been reading and studying and absorbing independently for over five years and have gotten dangerously close to working on one several times. Will this bee my lucky break? 🐝"
     />
-
-    <button id="randomize-user">Randomize</button>
-  </fieldset>
-
-  <fieldset>
-    <legend>Choose design options</legend>
-
-    <label class="switch__label" for="dark-mode-on">Dark mode</label>
+    
+    <label for="dark-mode-on">Dark mode</label>
     <input type="checkbox" id="dark-mode-on" />
 
     <label for="no-image">No Image</label>
@@ -53,12 +50,33 @@
 
     <label for="image">Image</label>
     <input type="radio" id="image" name="postImageVariants" value="image" />
-  </fieldset>
+
+    <div id="post-image-field" class="hidden">
+      <label for=post-image">Post Image URL</label>
+      <input
+        id="post-image"
+        type="text"
+        value="https://i.imgur.com/Beo0Vbl.jpeg"
+      />
+    </div>
+
+  <button id="randomize-user">Randomize</button>
   <button id="generate-post">Generate Post</button>
   <button id="close">Close</button>
+</fieldset>
 </form>
 
 <script>
+  document.querySelectorAll('input[name="postImageVariants"]').forEach(el => el.addEventListener("click", handleClick));
+
+  function handleClick() {  
+    if (document.getElementById("image").checked) {
+      document.getElementById("post-image-field").classList.remove("hidden")
+    } else {
+      document.getElementById("post-image-field").classList.add("hidden")
+    }
+}
+
   document.getElementById("randomize-user").onclick = (e) => {
     e.preventDefault();
     async function fetchFakeUser() {
@@ -68,36 +86,39 @@
     }
     fetchFakeUser().then((userData) => {
       const data = userData.results[0];
-      console.log("data ", data);
       document.getElementById("name").value =
         data.name.first + " " + data.name.last;
-      document.getElementById("username").value = "@" + data.login.username;
+      document.getElementById("headline").value = data.location.city;
       document.getElementById("avatar").value = data.picture.thumbnail;
       document.getElementById("thumbnail-preview").src = data.picture.thumbnail;
+      document.getElementById("content").value = `My password is ${data.login.password}, but please don't hack my LinkedIn.`
+      document.getElementById("post-image").value = 'https://picsum.photos/600/300'
     });
   };
 
   document.getElementById("generate-post").onclick = (e) => {
     e.preventDefault();
     const name = document.getElementById("name").value;
-    const username = document.getElementById("username").value;
+    const headline = document.getElementById("headline").value;
     const avatar = document.getElementById("avatar").value;
     const content = document.getElementById("content").value;
     const darkModeState = document.getElementById("dark-mode-on").checked;
     const imageVariant = document.querySelector(
       'input[name="postImageVariants"]:checked'
     ).value;
+    const imagePath = document.getElementById("post-image").value;
 
     parent.postMessage(
       {
         pluginMessage: {
           type: "generate-post",
           name,
-          username,
+          headline,
           avatar,
           content,
           darkModeState,
           imageVariant,
+          imagePath,
         },
       },
       "*"
