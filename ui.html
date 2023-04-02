@@ -151,6 +151,13 @@
     }
   }
 
+  document.getElementById("avatar").onchange = (e) => {
+    setTimeout(() => {
+      const newAvatar = document.getElementById("avatar").value
+      document.getElementById("thumbnail-preview").src = newAvatar
+    }, 500);
+  }
+
   document.getElementById("randomize-user").onclick = (e) => {
     e.preventDefault();
     const randomPosts = [
