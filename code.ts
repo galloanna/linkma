@@ -1,6 +1,6 @@
 figma.showUI(__html__);
 
-figma.ui.resize(500, 500);
+figma.ui.resize(500, 800);
 
 figma.ui.onmessage = async (pluginMessage) => {
   await figma.loadFontAsync({ family: "Segoe UI", style: "Regular" });

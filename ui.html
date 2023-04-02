@@ -1,81 +1,155 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
 <style>
-  input:not([type="radio"]),
-  button {
-    display: block;
-  }
+  /* New styles */
+
   .hidden {
     display: none;
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  fieldset {
+    border: none;
+  }
+
+  legend {
+    margin: 16px 0;
+    font-size: 18px;
+  }
+
+  .thumbnail-preview {
+    margin-top: 4px;
+    border-radius: 50%;
+  }
+
+  .randomize-button {
+    margin: 8px 0;
+  }
+
+  .main-buttons {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+  }
+
+
+  /* Overrides */
+
+  :root {
+    --blue: rebeccapurple;
+    --black3: #666;
+  }
+
+  .label,
+  .button,
+  .textarea,
+  .input__field,
+  .checkbox__label,
+  .radio__label {
+    font-size: 16px;
+  }
+
+  .textarea {
+    font-family: unset;
+  }
+
+  .input__field {
+    border: 1px solid var(--black1)
+  }
+
+  .input__field:hover {
+    border: 1px solid black;
+  }
+
+  .radio__button~.radio__label,
+  .checkbox__box~.checkbox__label {
+    cursor: pointer;
+
+  }
+
+  .radio__button:focus~.radio__label::before,
+  .checkbox__box:focus~.checkbox__label::before {
+    border: 2px solid var(--blue);
+  }
+
+  .checkbox__label::before,
+  .radio__label::before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .checkbox__box:checked+.checkbox__label::before,
+  .radio__button:checked+.radio__label::before {
+    background-size: 75%;
+    background-position: center;
   }
 </style>
 
 <h2>Linkma</h2>
 <form>
   <fieldset>
-    <legend>Update mock post information</legend>
+    <legend>Update mock post information.</legend>
 
-    <label for="name">Name</label>
-    <input id="name" type="text" value="Anna Gallo" />
-
-    <label for="headline">Headline</label>
-    <input id="headline" type="text" value="Frontend + Accessibility" />
-
-    <img
-      id="thumbnail-preview"
-      alt=""
-      src="https://i.imgur.com/AoYvA0H.png"
-      width="48px"
-      height="48px"
-    />
-    <label for="avatar">User Photo URL</label>
-    <input id="avatar" type="text" value="https://i.imgur.com/AoYvA0H.png" />
-
-    <label for="content">Post Content</label>
-    <input
-      id="content"
-      type="textarea"
-      value="I think Design Systems are the bee's knees. I've been reading and studying and absorbing independently for over five years and have gotten dangerously close to working on one several times. Will this bee my lucky break? 🐝"
-    />
-    
-    <label for="dark-mode-on">Dark mode</label>
-    <input type="checkbox" id="dark-mode-on" />
-
-    <label for="no-image">No Image</label>
-    <input
-      type="radio"
-      id="no-image"
-      name="postImageVariants"
-      value="no-image"
-      checked
-    />
-
-    <label for="image">Image</label>
-    <input type="radio" id="image" name="postImageVariants" value="image" />
-
-    <div id="post-image-field" class="hidden">
-      <label for=post-image">Post Image URL</label>
-      <input
-        id="post-image"
-        type="text"
-        value="https://i.imgur.com/Beo0Vbl.jpeg"
-      />
+    <div class="input">
+      <label for="name" class="label">Name</label>
+      <input id="name" type="text" value="Anna Gallo" class="input__field" />
     </div>
 
-  <button id="randomize-user">Randomize</button>
-  <button id="generate-post">Generate Post</button>
-  <button id="close">Close</button>
-</fieldset>
+    <label for="headline" class="label">Headline</label>
+    <input id="headline" type="text" value="Frontend + Accessibility" class="input__field" />
+
+    <img id="thumbnail-preview" class="thumbnail-preview" alt="" src="https://i.imgur.com/AoYvA0H.png" width="48px"
+      height="48px" />
+    <div class="input">
+      <label for="avatar" class="label">User Photo URL</label>
+      <input id="avatar" type="text" class="input__field" value="https://i.imgur.com/AoYvA0H.png" />
+    </div>
+
+    <label for="content" class="label">Post Content</label>
+    <textarea id="content" type="textarea" class="textarea" rows="5"
+      wrap="hard">I think Design Systems are the bee's knees. I've been reading and studying and absorbing independently for over five years and have gotten dangerously close to working on one several times. Will this bee my lucky break? 🐝</textarea>
+
+    <div class="checkbox">
+      <input type="checkbox" id="dark-mode-on" class="checkbox__box" />
+      <label for="dark-mode-on" class="checkbox__label">Dark mode</label>
+    </div>
+
+    <div class="radio">
+      <input type="radio" id="no-image" class="radio__button" name="postImageVariants" value="no-image" checked />
+      <label for="no-image" class="radio__label">No Image</label>
+    </div>
+
+    <div class="radio">
+      <input type="radio" id="image" name="postImageVariants" value="image" class="radio__button" />
+      <label for="image" class="radio__label">Image</label>
+    </div>
+
+    <div id="post-image-field" class="input hidden">
+      <label for=post-image" class="label">Post Image URL</label>
+      <input id="post-image" class="input__field" type="text" value="https://i.imgur.com/Beo0Vbl.jpeg" />
+    </div>
+
+    <button id="randomize-user" class="button button--tertiary randomize-button">Randomize input</button>
+    <div class="main-buttons">
+      <button id="generate-post" class="button button--primary">Generate Post</button>
+      <button id="close" class="button button--secondary">Close</button>
+    </div>
+  </fieldset>
 </form>
 
 <script>
   document.querySelectorAll('input[name="postImageVariants"]').forEach(el => el.addEventListener("click", handleClick));
 
-  function handleClick() {  
+  function handleClick() {
     if (document.getElementById("image").checked) {
       document.getElementById("post-image-field").classList.remove("hidden")
     } else {
       document.getElementById("post-image-field").classList.add("hidden")
     }
-}
+  }
 
   document.getElementById("randomize-user").onclick = (e) => {
     e.preventDefault();
@@ -85,7 +159,7 @@
       'Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.',
       'Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.',
       'Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
-      ]
+    ]
     async function fetchFakeUser() {
       const response = await fetch("https://randomuser.me/api/");
       const userData = await response.json();
