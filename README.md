@@ -7,7 +7,7 @@ Linkma is a Figma plugin that generates editable, prototypable Figma components 
 
 The plugin currently generates LinkedIn Post components.
 
-<img src="https://user-images.githubusercontent.com/61474460/229335152-e2ee9e58-4b55-488c-8f5d-282feae1646d.png" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229335152-e2ee9e58-4b55-488c-8f5d-282feae1646d.png" alt="" />
 
 ## ✔️ Features
 
@@ -22,28 +22,28 @@ The plugin currently generates LinkedIn Post components.
 
 *Link to downloadable Figma Community instance coming soon.*
 
-<img src="https://user-images.githubusercontent.com/61474460/229338580-ebb1a676-61a0-4314-b571-4f68cfc08620.gif" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229338580-ebb1a676-61a0-4314-b571-4f68cfc08620.gif" alt="" />
 <figcaption>Generating light mode post component with image from default content.</figcaption>
 </figure>
 <br>
 <hr>
 <br>
 <figure>
-<img src="https://user-images.githubusercontent.com/61474460/229338603-8f86b37e-5e25-4ffe-8531-bcb50a0b27bc.gif" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229338603-8f86b37e-5e25-4ffe-8531-bcb50a0b27bc.gif" alt="" />
 <figcaption>Generating dark mode post component with image from randomized content.</figcaption>
 </figure>
 <br>
 <hr>
 <br>
 <figure>
-<img src="https://user-images.githubusercontent.com/61474460/229338638-c70b004f-93e5-4f69-b073-b33883cb97a8.gif" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229338638-c70b004f-93e5-4f69-b073-b33883cb97a8.gif" alt="" />
 <figcaption>Generating light mode post component without image from custom content.</figcaption>
 </figure>
 <br>
 <hr>
 <br>
 <figure>
-<img src="https://user-images.githubusercontent.com/61474460/229339010-bcfc2b1f-c9a7-4fb0-9b96-c35d5cf9f05f.gif" width="60%" alt="" />
+<img src="https://user-images.githubusercontent.com/61474460/229339010-bcfc2b1f-c9a7-4fb0-9b96-c35d5cf9f05f.gif" alt="" />
 <figcaption>Generating light mode post component without image from randomized content.</figcaption>
 </figure>
 
